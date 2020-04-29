@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="c659ddb0-2a27-4aac-b43d-5c36eca4d458" name="Local Server" url="http://172.105.86.177:8090">
+        <fileTransfer host="172.105.86.177" port="22" rootFolder="/var/www/html/siteui" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions keepAliveTimeout="900000" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
