@@ -6,6 +6,8 @@ import Devices from "./Devices";
 import Reports from "./Reports";
 import Notifications from "./Notifications";
 import Device from "./Device";
+import {RequestError} from "./webservice/RequestError";
+import LogsView from "./components/LogsView";
 //import {RestDataSource} from "./webservice/RestDataSource";
 
 export default class ContentArea extends Component{
@@ -40,7 +42,7 @@ export default class ContentArea extends Component{
                                         <li className="nav-item">
                                             <NavLink className="nav-link" to="/devices" activeClassName="active">
                                                 <FeatherIcon icon="upload-cloud" />
-                                                Devices
+                                                Sites
                                             </NavLink>
                                         </li>
 
@@ -103,11 +105,14 @@ export default class ContentArea extends Component{
 
                             <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
                                 <Switch>
+                                    <Route path="/error/:message"
+                                           component={ RequestError } />
                                     <Route path="/" exact={true} component={Dashboard} />
                                     <Route path="/devices" exact={true} component={Devices} />
                                     <Route path="/reports" exact={true} component={Reports}/>
                                     <Route path="/notifications" exact={true} component={Notifications} />
-                                    <Route path="/devices/:id" extct={true} component={Device} />
+                                    <Route path="/devices/:id" exact={true} component={Device} />
+                                    <Route path="/devices/:id/:logs" exact={true} component={LogsView} />
                                 </Switch>
                             </main>
                         </div>

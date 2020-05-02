@@ -1,24 +1,27 @@
 import React, {Component} from 'react';
 import FeatherIcon from 'feather-icons-react';
 import {RestDataSource} from "./webservice/RestDataSource";
+//import Link from "react-router-dom/es/Link";
+import DevicesTable from "./DevicesTable";
 
 export default class Dashboard extends Component{
     constructor(props){
         super(props);
         this.state = {
+            devices: [],
             data: {
-                devices: [],
                 devices_count: "",
                 online_devices: ""
             }
         }
-        this.dataSource = new RestDataSource("http://172.105.86.177/monitor/monitor/dashboard?customer_id=1",
+        this.dataSource = new RestDataSource(`http://172.105.86.177/monitor/monitor/api/dashboard/${1}?timestamp=${new Date().getTime()}`,
             (err) => console.log(err));
     }
     receiveData = (data)=>{
         if(data.error === 'success'){
-            this.setState({data: data.data});
-            console.log("success", data.data);
+            console.log("success", data);
+            this.setState({data: data.data, devices: data.devices});
+
         }
         else
         {
@@ -49,7 +52,7 @@ export default class Dashboard extends Component{
                         <div className="alert alert-info text-center">
                             <i className="fa fa-desktop fa-5x"></i>
                             <h4> {this.state.data.devices_count}</h4>
-                            <h5>Are being Monitored</h5>
+                            <h5>Being Monitored</h5>
                         </div>
                     </div>
                     <div className="col-md-3 col-sm-3 col-xs-6">
@@ -62,7 +65,7 @@ export default class Dashboard extends Component{
                     </div>
                 </div>
 
-                <div className="row shadow">
+                <div className="row my-3">
                     <div className="col-md-6">
                         <h5>Alarm Statuses</h5>
                         <button className="btn btn-success">Okay</button>
@@ -73,42 +76,8 @@ export default class Dashboard extends Component{
                 </div>
 
 
-                <h2>Registered Sites</h2>
-                <div className="table-responsive">
-                    <table className="table table-striped table-sm">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Site Number</th>
-                            <th>Site Name</th>
-                            <th>Device IMEI</th>
-                            <th>Registration Date</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        {(this.state.data.devices === 0)&&
-                            <tr><td colSpan="6" className="text-center p-2">No Sites Registered</td></tr> }
-
-                        {
-                            this.state.data.devices && this.state.data.devices.map(dev=>
-                                <tr>
-                                    <td>dev.id</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            )
-                        }
-
-
-
-                        </tbody>
-                    </table>
-                </div>
+                <h2>Recent Registered Sites</h2>
+                <DevicesTable devices={this.state.devices} />
             </div>
         );
     }
