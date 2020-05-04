@@ -31,7 +31,7 @@ export default class ParamView extends Component {
                                             <td>L1-L3</td> <td>{this.getValue(this.props.l2nv)}</td>
                                         </tr>
                                         <tr>
-                                            <td>L2-3</td> <td>{this.getValue(this.props.l3nv)}</td>
+                                            <td>L2-L3</td> <td>{this.getValue(this.props.l3nv)}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -62,17 +62,6 @@ export default class ParamView extends Component {
                                         <tr>
                                             <td>Frequency</td><td>{this.getValue(this.props.frequency)}</td>
                                         </tr>
-                                        {
-                                            this.props.type === 'mains' &&
-                                                <React.Fragment>
-                                                    <tr>
-                                                        <td>Backup Voltage</td><td>{this.getValue(this.props.backup)}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Backup Load</td><td>{this.getValue(this.props.backup_load)}</td>
-                                                    </tr>
-                                                </React.Fragment>
-                                        }
 
                                         {
                                             this.props.type === 'gen' &&

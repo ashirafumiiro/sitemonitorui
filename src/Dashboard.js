@@ -3,6 +3,7 @@ import FeatherIcon from 'feather-icons-react';
 import {RestDataSource} from "./webservice/RestDataSource";
 //import Link from "react-router-dom/es/Link";
 import DevicesTable from "./DevicesTable";
+import NotificationsCard from "./components/NotificationsCard";
 
 export default class Dashboard extends Component{
     constructor(props){
@@ -52,30 +53,31 @@ export default class Dashboard extends Component{
                         <div className="alert alert-info text-center">
                             <i className="fa fa-desktop fa-5x"></i>
                             <h4> {this.state.data.devices_count}</h4>
-                            <h5>Being Monitored</h5>
+                            <h5>Sites Registered</h5>
                         </div>
                     </div>
                     <div className="col-md-3 col-sm-3 col-xs-6">
-                        <h5>Logging devices</h5>
+                        <h5>Active Sites</h5>
                         <div className="alert alert-info text-center">
                             <i className="fa fa-cloud-upload-alt fa-5x"></i>
                             <h4> {this.state.data.online_devices}</h4>
-                            <h5>Devices logging </h5>
+                            <h5>Sites Active </h5>
                         </div>
+                    </div>
+                    <div className="col-md-6">
+                        <NotificationsCard />
                     </div>
                 </div>
 
                 <div className="row my-3">
                     <div className="col-md-6">
                         <h5>Alarm Statuses</h5>
-                        <button className="btn btn-success">Okay</button>
-                        <button className="btn btn-info">Optimal</button>
-                        <button className="btn btn-primary">Mild</button>
-                        <button className="btn btn-danger">Critical</button>
+                        <button className="btn btn-success m-3">Okay</button>
+                        <button className="btn btn-info m-3">Optimal</button>
+                        <button className="btn btn-primary m-3">Mild</button>
+                        <button className="btn btn-danger m-3">Critical</button>
                     </div>
                 </div>
-
-
                 <h2>Recent Registered Sites</h2>
                 <DevicesTable devices={this.state.devices} />
             </div>

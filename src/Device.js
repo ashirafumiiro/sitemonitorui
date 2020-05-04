@@ -4,6 +4,7 @@ import ParamView from "./components/ParamView";
 //import GenView from "./components/GenView";
 //import {Link} from "react-router-dom";
 //import FeatherIcon from "feather-icons-react";
+//import loader from './assets/images/loader.gif';
 
 
 export default class Device extends Component{
@@ -192,6 +193,29 @@ export default class Device extends Component{
                                deviceID={this.props.match.params.id}/>
                     <ParamView {...this.state.data.gen_log} type={"gen"} timeConverter={this.getTime}
                                deviceID={this.props.match.params.id}/>
+
+                    <div className="card mb-5">
+                        <div className="card-header text-white bg-success">
+                            <h5>Backup Information</h5>
+                        </div>
+                        <div className="card-body">
+                            <table className="card-table table">
+                                <tbody>
+                                <tr>
+                                    <td>Backup Voltage</td>
+                                    <td>{this.state.data.mains_log.backup}</td>
+                                </tr>
+                                <tr>
+                                    <td>Backup Load</td>
+                                    <td>{this.state.data.mains_log.backup_load}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className="card-footer">
+                            <small className="text-muted">Last updated {this.getTime(this.state.data.mains_log.time)}</small>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -216,7 +240,7 @@ export default class Device extends Component{
         return <button type="button" className={alarmClass} />
     }
     getMainsAlarm = (code) =>{
-        if (code === undefined) return 'n/a';
+        if (code === undefined) return "n/a";
         return this.getAlarm(1);
     }
 }

@@ -10,9 +10,8 @@ export default class DevicesTable extends Component{
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Site Number</th>
+                        <th>Site ID</th>
                         <th>Site Name</th>
-                        <th>Device IMEI</th>
                         <th>Registration Date</th>
                         <th>Status</th>
                     </tr>
@@ -28,7 +27,6 @@ export default class DevicesTable extends Component{
                                 <td>{count++}</td>
                                 <td><Link to={`/devices/${dev.serial_number}`}>{dev.site_serial} </Link></td>
                                 <td>{dev.site_name}</td>
-                                <td>{dev.device_imei}</td>
                                 <td>{new Date(dev.registration_date).toDateString()}</td>
                                 <td>
                                         <span className={`badge badge-${dev.check_status==='online'? "success" : "danger"}`}>

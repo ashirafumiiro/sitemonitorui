@@ -35,8 +35,7 @@ export default class ContentArea extends Component{
                                         <li className="nav-item">
                                             <NavLink className="nav-link" to="/" exact={true} activeClassName="active">
                                                 <FeatherIcon icon="home" />
-                                                Dashboard <Route exact={true} path="/" render={ (routeProps) =>
-                                                <span className="sr-only">(current)</span> } />
+                                                Dashboard <span className="sr-only">(current)</span>
                                             </NavLink>
                                         </li>
                                         <li className="nav-item">
