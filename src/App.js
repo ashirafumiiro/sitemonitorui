@@ -13,7 +13,7 @@ import ContentArea from "./ContentArea";
 class App extends Component{
 
     render() {
-    let name = "Towers Monitor";
+    let name = "Towers Monitoring Tool";
     return (
 
         <div className="App">

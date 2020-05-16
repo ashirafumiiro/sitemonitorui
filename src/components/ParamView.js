@@ -6,7 +6,7 @@ export default class ParamView extends Component {
         return (
             <div className="mb-5">
                 <div className="card">
-                    <div className="card-header text-center">
+                    <div className={`card-header text-white ${this.props.type==="mains" ? "bg-success":"bg-warning"}`}>
                         <h5>{this.props.type==="mains" ? "Mains":"Generator"} Information</h5>
                     </div>
                     <div className="card-body">
@@ -25,13 +25,13 @@ export default class ParamView extends Component {
                                             <td>L3-N</td> <td>{this.getValue(this.props.l3nv )}</td>
                                         </tr>
                                         <tr>
-                                            <td>L1-L2</td> <td>{this.getValue(this.props.l1nv)}</td>
+                                            <td>L1-L2</td> <td>{this.getValue(this.props.l1l2v)}</td>
                                         </tr>
                                         <tr>
-                                            <td>L1-L3</td> <td>{this.getValue(this.props.l2nv)}</td>
+                                            <td>L1-L3</td> <td>{this.getValue(this.props.l1l3v)}</td>
                                         </tr>
                                         <tr>
-                                            <td>L2-L3</td> <td>{this.getValue(this.props.l3nv)}</td>
+                                            <td>L2-L3</td> <td>{this.getValue(this.props.l2l3v)}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -86,7 +86,6 @@ export default class ParamView extends Component {
                                                     </tr>
                                                 </React.Fragment>
                                         }
-
                                         </tbody>
                                     </table>
                                 </div>

@@ -195,7 +195,7 @@ export default class Device extends Component{
                                deviceID={this.props.match.params.id}/>
 
                     <div className="card mb-5">
-                        <div className="card-header text-white bg-success">
+                        <div className="card-header text-white bg-primary">
                             <h5>Backup Information</h5>
                         </div>
                         <div className="card-body">
