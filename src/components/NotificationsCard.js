@@ -75,6 +75,8 @@ export default class NotificationsCard extends Component{
                             page={this.state.data.current_page}
                             onChange={this.handlePageChange}
                             color="primary"
+                            variant="outlined"
+                            shape="rounded"
                         />
                     </div>
                 }

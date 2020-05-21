@@ -40,7 +40,10 @@ export default class Notifications extends Component{
                                     Receive Email
                                 </label>
                             </div>
-                            <button className="btn btn-primary float-right">Save Changes</button>
+                            <button className="btn btn-primary float-right"
+                                    onClick={(ev)=>ev.preventDefault()}>
+                                Save Changes
+                            </button>
                         </form>
                     </div>
 

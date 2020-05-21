@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {NavLink, Route, BrowserRouter as Router, Switch, Link} from "react-router-dom";
+import {NavLink, Route, Switch, Link} from "react-router-dom";
 import FeatherIcon from "feather-icons-react";
 import Dashboard from "./Dashboard";
 import Devices from "./Devices";
@@ -14,7 +14,7 @@ export default class ContentArea extends Component{
 
     render() {
         return (
-            <Router>
+            <React.Fragment>
                 <div>
                     <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
                         <Link className="navbar-brand col-sm-3 col-md-2 mr-0" to="/" exact={true}>{this.props.companyName}</Link>
@@ -22,7 +22,7 @@ export default class ContentArea extends Component{
                                aria-label="Search" />
                         <ul className="navbar-nav px-3">
                             <li className="nav-item text-nowrap">
-                                <Link className="nav-link" to="/singout">Sign out</Link>
+                                <Link className="nav-link" to="/login">Sign out</Link>
                             </li>
                         </ul>
                     </nav>
@@ -117,7 +117,7 @@ export default class ContentArea extends Component{
                         </div>
                     </div>
                 </div>
-            </Router>
+            </React.Fragment>
         );
     }
 }

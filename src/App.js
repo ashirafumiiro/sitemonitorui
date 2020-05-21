@@ -8,20 +8,50 @@ import 'bootstrap/dist/js/bootstrap.min';
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import './dashboard.css';
 import ContentArea from "./ContentArea";
+import {Route, BrowserRouter as Router, Switch, Redirect} from "react-router-dom";
+import Login from "./Login";
 
 
 class App extends Component{
+    constructor(props) {
+        super(props);
+        this.state ={
+            isLoggedIn : false,
+            user: undefined,
+            customer_id: undefined
+        }
+    }
+    onLogOn = (user) =>{
+        this.setState({isLoggedIn: true});
+        this.setState({user: user});
+        console.log("logged in user:", user);
+        //window.location="/";
+        this.render()
+
+    }
 
     render() {
     let name = "Towers Monitoring Tool";
     return (
+        <Router>
+            <div className="App">
+                <Switch>
+                    <Route path="/login" exact={true} render={routeProps=>
+                        <Login onLogOn={this.onLogOn}/>
+                    }/>
+                    <Route path="/" render={routeProps => {
+                        if(!this.state.isLoggedIn){
+                            return <Redirect to="/login" />
+                        }
+                        return <ContentArea companyName={name}/>
+                    }
+                    }
 
-        <div className="App">
-          <ContentArea companyName={name}>
+                    />
+                </Switch>
+            </div>
+        </Router>
 
-          </ContentArea>
-
-        </div>
     );
   }
 }
