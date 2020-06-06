@@ -12,6 +12,9 @@ import LogsView from "./components/LogsView";
 
 export default class ContentArea extends Component{
 
+    handleSignOut = () => {
+        sessionStorage.clear();
+    }
     render() {
         return (
             <React.Fragment>
@@ -22,7 +25,7 @@ export default class ContentArea extends Component{
                                aria-label="Search" />
                         <ul className="navbar-nav px-3">
                             <li className="nav-item text-nowrap">
-                                <Link className="nav-link" to="/login">Sign out</Link>
+                                <Link className="nav-link" onClick={this.handleSignOut} to="/login">Sign out</Link>
                             </li>
                         </ul>
                     </nav>
@@ -112,6 +115,7 @@ export default class ContentArea extends Component{
                                     <Route path="/notifications" exact={true} component={Notifications} />
                                     <Route path="/devices/:id" exact={true} component={Device} />
                                     <Route path="/devices/:id/:logs" exact={true} component={LogsView} />
+                                    <Route path="/network/error" exact={true} />
                                 </Switch>
                             </main>
                         </div>

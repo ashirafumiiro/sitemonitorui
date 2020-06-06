@@ -48,7 +48,7 @@ export default class Notifications extends Component{
                     </div>
 
                     <div className="col-6">
-                        <NotificationsCard count={6} dashboard={true}/>
+                        <NotificationsCard count={10} paginate={true}/>
                     </div>
 
                 </div>

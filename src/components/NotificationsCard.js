@@ -14,7 +14,7 @@ export default class NotificationsCard extends Component{
                 current_page: 1,
                 unread: 0,
             },
-            //count_per_page: this.props.count
+            count_per_page: this.props.count
         }
 
     }
@@ -26,7 +26,7 @@ export default class NotificationsCard extends Component{
 
     getNotifications = (page)=>{
         let dataSource = new RestDataSource(
-            `http://172.105.86.177/monitor/monitor/api/notifications/${1}/${page}/${this.props.count}?timestamp=${new Date().getTime()}`,
+            `http://172.105.86.177/monitor/monitor/api/notifications/${1}/${page}/${this.state.count_per_page}?timestamp=${new Date().getTime()}`,
             (err)=>console.log("Error: ", err));
         dataSource.GetData(data=>this.dataReceived(data));
     }
@@ -59,7 +59,7 @@ export default class NotificationsCard extends Component{
                             this.state.data.notifications.map(notification=>{
                                 let datetime = new Date(notification.time);
                                 return <li key={notification.time} className="list-group-item text-sm-left">
-                                    {notification.message} <br />
+                                    <span className="text-primary">{notification.site_name}</span>: {notification.message} <br />
                                     <span className="text-muted">Time: {datetime.toDateString()} at {datetime.toLocaleTimeString()}</span>
                                 </li>
                             })
@@ -68,16 +68,28 @@ export default class NotificationsCard extends Component{
                     </ul>
                 </div>
                 {
-                    this.props.dashboard === true &&
-                    <div className="my-3 float-right">
-                        <Pagination
-                            count={this.state.data.pages_cont}
-                            page={this.state.data.current_page}
-                            onChange={this.handlePageChange}
-                            color="primary"
-                            variant="outlined"
-                            shape="rounded"
-                        />
+                    this.props.paginate === true &&
+                    <div>
+                        <div className="my-3 float-left">
+                            <select className="custom-select custom-select-sm"
+                                    onChange={event => this.setState({count_per_page: event.target.value})}
+                                    value={this.state.count_per_page}>
+                                <option value="10" selected>10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                            </select>
+                        </div>
+                        <div className="my-3 float-right">
+                            <Pagination
+                                count={this.state.data.pages_cont}
+                                page={this.state.data.current_page}
+                                onChange={this.handlePageChange}
+                                color="primary"
+                                variant="outlined"
+                                shape="rounded"
+                            />
+                        </div>
+
                     </div>
                 }
             </div>

@@ -24,6 +24,9 @@ export default class Login extends Component{
     responseCallback = (data) =>{
         if (data.error === 'success'){
             this.props.onLogOn(data.user);
+            //Session.set('user', data.user);
+            sessionStorage.setItem('user', data.user);
+
             this.setState({isLoggedIn: true});
         }
         else{
@@ -36,7 +39,7 @@ export default class Login extends Component{
         this.setState({isLoading: true});
         e.preventDefault();
         let error_message = '';
-        console.log("email:", this.state.username," Pwd: ", this.state.password)
+        //console.log("email:", this.state.username," Pwd: ", this.state.password)
         if(!this.state.username || !this.state.password)
             error_message = "Both Email and password are required!";
         else if (!this.isValidEmail(this.state.username))

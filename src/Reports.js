@@ -5,6 +5,7 @@ import DevicesStatistics from "./components/DevicesStatistics";
 import DevicesTable from "./DevicesTable";
 import {RestDataSource} from "./webservice/RestDataSource";
 import FeatherIcon from "feather-icons-react";
+import ExcelExport from "./components/ExcelExport";
 
 
 export default class Reports extends Component{
@@ -15,7 +16,11 @@ export default class Reports extends Component{
             category: 'online',
             devices: [],
             pages_count: 0,
-            current_page: 1
+            current_page: 1,
+            showDownload: false,
+            report_statistics: {},
+            report_devices: [],
+            loading_report: false
         }
         this.dataSource = new RestDataSource(`http://172.105.86.177/monitor/monitor/api/reports/${1}?timestamp=${new Date().getTime()}`,
             (err)=>console.log("Error: ", err));
@@ -42,6 +47,33 @@ export default class Reports extends Component{
         });
     }
 
+    getReport = ()=>{
+        this.setState({loading_report: true});
+        let deviceDataSource = new RestDataSource(
+            `http://172.105.86.177/monitor/monitor/api/reports/${1}/1?timestamp=${new Date().getTime()}`,
+            (err) => {
+                this.setState({loading_report: false})
+                console.log(err);
+            });
+        deviceDataSource.GetData( (data)=> {
+            //this.setState({});
+            if(data.statistics){
+                this.setState({
+                    loading_report: false,
+                    showDownload: true,
+                    report_statistics: data.statistics,
+                    report_devices: data.devices
+                });
+            }
+            else {
+                this.setState({loading_report: false});
+                // Failed to load data
+            }
+            //console.log(data);
+
+        });
+    }
+
     searchDevices = (e)=>{
         let url = `http://172.105.86.177/monitor/monitor/api/devices/${1}/${e.target.value}?timestamp=${new Date().getTime()}`
         if (e.target.value === ""){
@@ -49,18 +81,21 @@ export default class Reports extends Component{
         }
         let deviceDataSource = new RestDataSource(
             url,
-            (err) => console.log(err));
+            (err) => {
+                console.log(err)
+            });
         deviceDataSource.GetData( (data)=>{
             this.setState({
                 devices: data.devices,
                 pages_count: data.pages_cont,
                 current_page: data.current_page
             });
-            //console.log(data)
+            console.log(data)
         });
     }
 
     render(){
+        //console.log(sessionStorage.getItem('user'));
     //let data = [{"name":"A","uv":400,"pv":240,"amt":2400},{"name":"B","uv":300,"pv":456,"amt":2400},{"name":"C","uv":300,"pv":139,"amt":2400},{"name":"D","uv":200,"pv":980,"amt":2400},{"name":"E","uv":278,"pv":390,"amt":2400},{"name":"F","uv":189,"pv":480,"amt":2400}]
         return (
             <div>
@@ -68,8 +103,20 @@ export default class Reports extends Component{
                     <h1 className="h2">Reports</h1>
                     <div className="btn-toolbar mb-2 mb-md-0">
                         <div className="btn-group mr-2">
-                            <button className="btn btn-sm btn-outline-secondary">Share</button>
-                            <button className="btn btn-sm btn-outline-secondary">Export</button>
+                            <button className="btn btn-sm btn-outline-secondary"></button>
+                            <button className="btn btn-sm btn-outline-secondary"
+                                onClick={this.getReport}>Export & Share</button>
+                            {this.state.loading_report &&
+                                <button className="btn btn-sm btn-primary ml-2">
+                                    <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true">
+                                    </span>
+                                    Loading...
+                                </button>}
+                            <ExcelExport showDownload={this.state.showDownload}
+                                         completed={()=>this.setState({showDownload: false})}
+                                         devices={this.state.report_devices}
+                                         statistics={this.state.report_statistics}
+                            />
                         </div>
                         <button className="btn btn-sm btn-outline-secondary dropdown-toggle">
                             <FeatherIcon icon="calendar" />

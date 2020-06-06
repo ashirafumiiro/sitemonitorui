@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {RestDataSource} from "./webservice/RestDataSource";
 import ParamView from "./components/ParamView";
+import {Link} from "react-router-dom";
 //import GenView from "./components/GenView";
 //import {Link} from "react-router-dom";
 //import FeatherIcon from "feather-icons-react";
@@ -213,7 +214,13 @@ export default class Device extends Component{
                             </table>
                         </div>
                         <div className="card-footer">
-                            <small className="text-muted">Last updated {this.getTime(this.state.data.mains_log.time)}</small>
+                            <small className="text-muted">
+                                Last updated {this.getTime(this.state.data.mains_log.time)}
+                            </small>
+                            <Link className="btn btn-sm btn-primary float-right"
+                                  to={`${this.props.match.params.id}/mains`} >
+                                View Logs
+                            </Link>
                         </div>
                     </div>
                 </div>

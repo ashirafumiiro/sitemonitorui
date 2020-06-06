@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {RestDataSource} from "../webservice/RestDataSource";
 import {PaginationButtons} from "./PaginationButtons";
+import DatePickers from "./DatePickers";
 
 export default class LogsView extends Component{
     constructor(props){
@@ -132,9 +133,20 @@ export default class LogsView extends Component{
                         </tbody>
                     </table>
                 </div>
-                <div className="float-right mb-5">
+                <div className="row mb-5">
                     <PaginationButtons navigate={this.navigate} pageCount={this.state.data.num_pages}
                                        currentPage={this.state.data.current}/>
+                </div>
+
+                <div className="border-top my-3">
+                    <h2>Data Export</h2>
+                    <div className="row">
+                        <div className="col">From: <DatePickers /></div>
+                        <div className="col">To: <DatePickers /></div>
+                        <div className="col"><button className="btn btn-primary">Generate Data</button></div>
+
+                    </div>
+
                 </div>
 
             </div>

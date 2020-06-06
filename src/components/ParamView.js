@@ -94,7 +94,10 @@ export default class ParamView extends Component {
                     </div>
                     <div className="card-footer text-muted">
                         Last updated: {this.props.timeConverter(this.props.time)}
-                        <Link className="btn btn-sm btn-primary float-right" to={`${this.props.deviceID}/${this.props.type==='mains'? 'mains':'generator'}`} >View Logs</Link>
+                        <Link className="btn btn-sm btn-primary float-right"
+                              to={`${this.props.deviceID}/${this.props.type==='mains'? 'mains':'generator'}`} >
+                            View Logs
+                        </Link>
                     </div>
                 </div>
             </div>

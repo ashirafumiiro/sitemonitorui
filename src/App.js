@@ -31,7 +31,7 @@ class App extends Component{
     }
 
     render() {
-    let name = "Towers Monitoring Tool";
+    let name = "Power Monitoring Tool";
     return (
         <Router>
             <div className="App">
@@ -40,7 +40,7 @@ class App extends Component{
                         <Login onLogOn={this.onLogOn}/>
                     }/>
                     <Route path="/" render={routeProps => {
-                        if(!this.state.isLoggedIn){
+                        if(!(sessionStorage.getItem('user'))){
                             return <Redirect to="/login" />
                         }
                         return <ContentArea companyName={name}/>
