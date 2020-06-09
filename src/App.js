@@ -9,7 +9,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css'
 import './dashboard.css';
 import ContentArea from "./ContentArea";
 import {Route, BrowserRouter as Router, Switch, Redirect} from "react-router-dom";
-import Login from "./Login";
+import Login from "./pages/Login";
 
 
 class App extends Component{

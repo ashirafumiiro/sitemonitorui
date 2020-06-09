@@ -14,15 +14,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function DatePickers() {
+export default function DatePickers(props) {
     const classes = useStyles();
     return (
         <form className={classes.container} noValidate>
             <TextField
-                id="date"
                 label="Select Date"
                 type="date"
-
+                onChange={props.onChange}
                 className={classes.textField}
                 InputLabelProps={{
                     shrink: true,

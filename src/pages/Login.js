@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 //import {Link} from "react-router-dom";
-import './signin.css'
+import '../signin.css'
 //import {RestDataSource} from "./webservice/RestDataSource";
 import Axios from "axios";
 import {Redirect} from "react-router-dom";
@@ -121,7 +121,7 @@ export default class Login extends Component{
                             type="submit">
                         {
                             !this.state.isLoading ? "Login": <React.Fragment>
-                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 Loading...
                             </React.Fragment>
                         }

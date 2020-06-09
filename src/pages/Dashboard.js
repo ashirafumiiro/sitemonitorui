@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 //import FeatherIcon from 'feather-icons-react';
-import {RestDataSource} from "./webservice/RestDataSource";
+import {RestDataSource} from "../webservice/RestDataSource";
 //import Link from "react-router-dom/es/Link";
-import DevicesTable from "./DevicesTable";
-import NotificationsCard from "./components/NotificationsCard";
+import DevicesTable from "../components/DevicesTable";
+import NotificationsCard from "../components/NotificationsCard";
 
 export default class Dashboard extends Component{
     constructor(props){

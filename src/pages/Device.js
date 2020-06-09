@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {RestDataSource} from "./webservice/RestDataSource";
-import ParamView from "./components/ParamView";
+import {RestDataSource} from "../webservice/RestDataSource";
+import ParamView from "../components/ParamView";
 import {Link} from "react-router-dom";
 //import GenView from "./components/GenView";
 //import {Link} from "react-router-dom";

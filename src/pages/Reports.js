@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 //import {LineChart, XAxis, YAxis, CartesianGrid, Line, } from "recharts";
-import DatePickers from "./components/DatePickers";
-import DevicesStatistics from "./components/DevicesStatistics";
-import DevicesTable from "./DevicesTable";
-import {RestDataSource} from "./webservice/RestDataSource";
+import DatePickers from "../components/DatePickers";
+import DevicesStatistics from "../components/DevicesStatistics";
+import DevicesTable from "../components/DevicesTable";
+import {RestDataSource} from "../webservice/RestDataSource";
 import FeatherIcon from "feather-icons-react";
-import ExcelExport from "./components/ExcelExport";
+import ExcelExport from "../components/ExcelExport";
 
 
 export default class Reports extends Component{

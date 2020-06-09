@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {NavLink, Route, Switch, Link} from "react-router-dom";
 import FeatherIcon from "feather-icons-react";
-import Dashboard from "./Dashboard";
-import Devices from "./Devices";
-import Reports from "./Reports";
-import Notifications from "./Notifications";
-import Device from "./Device";
+import Dashboard from "./pages/Dashboard";
+import Devices from "./pages/Devices";
+import Reports from "./pages/Reports";
+import Notifications from "./pages/Notifications";
+import Device from "./pages/Device";
 import {RequestError} from "./webservice/RequestError";
 import LogsView from "./components/LogsView";
 //import {RestDataSource} from "./webservice/RestDataSource";
@@ -20,7 +20,7 @@ export default class ContentArea extends Component{
             <React.Fragment>
                 <div>
                     <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-                        <Link className="navbar-brand col-sm-3 col-md-2 mr-0" to="/" exact={true}>{this.props.companyName}</Link>
+                        <Link className="navbar-brand col-sm-3 col-md-2 mr-0" to="/" exact="true">{this.props.companyName}</Link>
                         <input className="form-control form-control-dark w-100" type="text" placeholder="Search"
                                aria-label="Search" />
                         <ul className="navbar-nav px-3">
@@ -33,7 +33,6 @@ export default class ContentArea extends Component{
                         <div className="row">
                             <nav className="col-md-2 d-none d-md-block bg-light sidebar">
                                 <div className="sidebar-sticky">
-                                    {/*Remove flex-column class*/}
                                     <ul className="nav flex-column">
                                         <li className="nav-item">
                                             <NavLink className="nav-link" to="/" exact={true} activeClassName="active">
@@ -55,13 +54,13 @@ export default class ContentArea extends Component{
                                             </NavLink>
                                         </li>
                                         <li className="nav-item">
-                                            <NavLink className="nav-link" exact={true} to="/notifications" activeClassName="active">
+                                            <NavLink className="nav-link" to="/notifications" activeClassName="active">
                                                 <FeatherIcon icon="bell" />
                                                 Notifications
                                             </NavLink>
                                         </li>
                                         <li className="nav-item">
-                                            <NavLink className="nav-link" to="/periodic" exact={true} activeClassName="active">
+                                            <NavLink className="nav-link" to="/periodic" activeClassName="active">
                                                 <FeatherIcon icon="user" />
                                                 Accounts
                                             </NavLink>
@@ -109,13 +108,13 @@ export default class ContentArea extends Component{
                                 <Switch>
                                     <Route path="/error/:message"
                                            component={ RequestError } />
-                                    <Route path="/" exact={true} component={Dashboard} />
-                                    <Route path="/devices" exact={true} component={Devices} />
-                                    <Route path="/reports" exact={true} component={Reports}/>
-                                    <Route path="/notifications" exact={true} component={Notifications} />
-                                    <Route path="/devices/:id" exact={true} component={Device} />
-                                    <Route path="/devices/:id/:logs" exact={true} component={LogsView} />
-                                    <Route path="/network/error" exact={true} />
+                                    <Route path="/" exact component={Dashboard} />
+                                    <Route path="/devices" exact component={Devices} />
+                                    <Route path="/reports" exact component={Reports}/>
+                                    <Route path="/notifications" exact component={Notifications} />
+                                    <Route path="/devices/:id" exact component={Device} />
+                                    <Route path="/devices/:id/:logs" exact component={LogsView} />
+                                    <Route path="/network/error" exact />
                                 </Switch>
                             </main>
                         </div>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import NotificationsCard from "./components/NotificationsCard";
+import NotificationsCard from "../components/NotificationsCard";
 
 
 export default class Notifications extends Component{

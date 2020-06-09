@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import {RestDataSource} from "./webservice/RestDataSource";
-import DevicesTable from "./DevicesTable";
+import {RestDataSource} from "../webservice/RestDataSource";
+import DevicesTable from "../components/DevicesTable";
 
 export default class Devices extends Component{
     constructor(props){

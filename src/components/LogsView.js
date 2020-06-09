@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {RestDataSource} from "../webservice/RestDataSource";
 import {PaginationButtons} from "./PaginationButtons";
 import DatePickers from "./DatePickers";
+import Axios from "axios";
+const FileDownload = require('js-file-download');
+
 
 export default class LogsView extends Component{
     constructor(props){
@@ -13,7 +16,10 @@ export default class LogsView extends Component{
                 num_pages: 0,
                 has_next: false,
             },
-            logsPerPage: 25
+            logsPerPage: 25,
+            from_date: "",
+            to_date: "",
+            download_error: ""
         };
     }
     receiveData = (data)=>{
@@ -140,19 +146,47 @@ export default class LogsView extends Component{
 
                 <div className="border-top my-3">
                     <h2>Data Export</h2>
-                    <div className="row">
-                        <div className="col">From: <DatePickers /></div>
-                        <div className="col">To: <DatePickers /></div>
-                        <div className="col"><button className="btn btn-primary">Generate Data</button></div>
-
-                    </div>
-
+                        <div className="row">
+                            <div className="col">From: <DatePickers
+                                onChange={(e)=>this.setState({from_date :e.target.value})}/>
+                            </div>
+                            <div className="col">To: <DatePickers
+                                onChange={e=>this.setState({to_date :e.target.value})} />
+                            </div>
+                            <div className="col">
+                                <button className="btn btn-primary" onClick={this.handleDownload}>Generate Data</button>
+                                {this.state.download_error &&
+                                <div className="my-2 alert alert-warning" role="alert">
+                                    {this.state.download_error}
+                                </div>
+                                }
+                            </div>
+                        </div>
                 </div>
-
             </div>
         );
     }
     componentDidMount() {
         this.getLogs(1, this.state.logsPerPage);
+    }
+
+    handleDownload = ()=>{
+        if(this.state.from_date==='' || this.state.to_date===''){
+            this.setState({download_error: "Select valid date range"})
+        }
+        else {
+            this.setState({download_error: ""})
+            let from = this.state.from_date;
+            let to = this.state.to_date;
+            console.log("From", from);
+            console.log('To date:', to)
+            Axios.get(`http://localhost:8000/monitor/api/logs/${this.props.match.params.id}/${this.props.match.params.logs}/${from}/${to}?timestamp=${new Date().getTime()}`)
+                .then((response) => {
+                    FileDownload(response.data, from+'_'+to+'.csv');
+                }).catch((err)=>{
+                    console.log(err)
+            });
+
+        }
     }
 }
