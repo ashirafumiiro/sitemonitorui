@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {RestDataSource} from "../webservice/RestDataSource";
 import {PaginationButtons} from "./PaginationButtons";
 import DatePickers from "./DatePickers";
-import Axios from "axios";
-const FileDownload = require('js-file-download');
+//import Axios from "axios";
+import DownloadFrame from "./DownloadFrame";
+//const FileDownload = require('js-file-download');
 
 
 export default class LogsView extends Component{
@@ -19,7 +20,8 @@ export default class LogsView extends Component{
             logsPerPage: 25,
             from_date: "",
             to_date: "",
-            download_error: ""
+            download_error: "",
+            download_url: ''
         };
     }
     receiveData = (data)=>{
@@ -146,6 +148,12 @@ export default class LogsView extends Component{
 
                 <div className="border-top my-3">
                     <h2>Data Export</h2>
+                    <p className="">Select range of date to download.
+                        <span className="text-warning">
+                            It is recommended to download data over shorter intervals if you have a poor
+                            internet connection
+                        </span>
+                    </p>
                         <div className="row">
                             <div className="col">From: <DatePickers
                                 onChange={(e)=>this.setState({from_date :e.target.value})}/>
@@ -162,6 +170,7 @@ export default class LogsView extends Component{
                                 }
                             </div>
                         </div>
+                    <DownloadFrame iframeSrc={this.state.download_url} />
                 </div>
             </div>
         );
@@ -180,12 +189,14 @@ export default class LogsView extends Component{
             let to = this.state.to_date;
             console.log("From", from);
             console.log('To date:', to)
-            Axios.get(`http://localhost:8000/monitor/api/logs/${this.props.match.params.id}/${this.props.match.params.logs}/${from}/${to}?timestamp=${new Date().getTime()}`)
-                .then((response) => {
-                    FileDownload(response.data, from+'_'+to+'.csv');
-                }).catch((err)=>{
-                    console.log(err)
-            });
+            let url = `http://172.105.86.177/monitor/monitor/api/logs/${this.props.match.params.id}/${this.props.match.params.logs}/${from}/${to}?timestamp=${new Date().getTime()}`
+            // Axios.get(url)
+            //     .then((response) => {
+            //         FileDownload(response.data, from+'_'+to+'.csv');
+            //     }).catch((err)=>{
+            //         console.log(err)
+            // });
+            this.setState({download_url: url});
 
         }
     }
